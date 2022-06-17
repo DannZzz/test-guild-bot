@@ -1,0 +1,31 @@
+{
+  "dependencies": {
+    "client-discord": "^1.0.7",
+    "dann-util": "^1.0.2",
+    "discord.js": "^13.6.0",
+    "glob": "^7.2.0",
+    "mongoose": "^6.2.1",
+    "ms": "^2.1.3",
+    "valid-url": "^1.0.9"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.2.0",
+    "@types/ms": "^0.7.31",
+    "@types/valid-url": "^1.0.3",
+    "dotenv": "^16.0.0",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.5"
+  },
+  "name": "discord-guild-manager",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "start:prod": "node dist/index.js",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "Dann",
+  "license": "ISC",
+  "description": "Discord guild mode bot"
+}

@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "lib": ["ESNext"],
+        "watch": false,
+        "disableSourceOfProjectReferenceRedirect": true,
+        "esModuleInterop": true,
+        "skipDefaultLibCheck": true,
+        "skipLibCheck": true,
+        "sourceMap": false,
+        "target": "ES6",
+        "outDir": "dist",
+        "experimentalDecorators": true,
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "allowSyntheticDefaultImports":true ,
+        "resolveJsonModule": true,
+        "module": "commonjs"
+    },
+    "exclude": [
+        "node_modules",
+        ".env",
+        "dist"
+    ],
+    "include": [
+        "src"
+    ]
+}
