@@ -13,7 +13,7 @@ export default new MessageCommand({
         const memberData = await findOrCreate("members", msg.author.id) as Member;
         const daily = memberData.daily;
         let reward: number, day: number;
-        const oneDay = 10000;// 86400000
+        const oneDay = 86400000;
         if (!daily || !daily.last || !daily.day) {
 
             reward = ONE_DAY_REWARD;
