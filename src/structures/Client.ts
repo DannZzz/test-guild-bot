@@ -56,7 +56,7 @@ async function load () {
 // checking and connecting database 
 client.checkMongoUri = () => Boolean(MONGO_URI);
 if (client.checkMongoUri()) {
-    mongoose.connect(MONGO_URI).then(() => console.log("database connected"))
+    mongoose.connect(MONGO_URI).then(() => console.log("Database was successfully connected!"))
 } else {
     console.log("U need to connect mongo db")
 }
