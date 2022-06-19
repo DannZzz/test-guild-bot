@@ -56,6 +56,7 @@ export const GUILD_NAME_MAX_LENGTH: number = +process.env.GUILD_NAME_MAX_LENGT |
 | COLOR_ERROR | Текст | Цвет ошибок EMBED |
 | COLOR_SUCCESS | Текст | Цвет при удачных выполнянных действий EMBED |
 | UNION_DECLINED_COOLDOWN | Число | Количество часов кулдауна после отклонение предложений союза |
+| ONE_MINUTE_VOICE | Число | Количество опыта за одну минуту в войсе |
 
 ## Если указываем эмодзи (смайл), то нужно еще и указать ID
 - Просто перед эмодзи ставим **\\**
