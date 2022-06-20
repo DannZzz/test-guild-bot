@@ -50,7 +50,7 @@ export default new Event ({
                     if (currentTime < expire) {
                         const time = (expire - currentTime) / 1000;
 
-                        return Embed(message).setAuthor({name: "💣 | Вы слишком часто пользуете эту команду!"}).setError(`Подаждите пожалуйста ещё **${time.toFixed(1)}** секунд.`).send();
+                        return Embed(message).setAuthor({name: "💣 | Вы слишком часто пользуете эту команду!"}).setError(`Подождите пожалуйста ещё **${time.toFixed(1)}** секунд.`).send();
                     }
                 }
 
