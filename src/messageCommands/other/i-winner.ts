@@ -41,7 +41,7 @@ export default new MessageCommand ({
 
         Embed(msg)
             .setTitle("Подтверждение Дуэли")
-            .setText(`Победитель: ${msg.member} +${CURRENCY.main} ${client.util.formatNumber(bet)}\n\nПроигравший: ${member} -${CURRENCY.main} ${client.util.formatNumber(bet)}`)
+            .setText(`Победитель: ${msg.member} +${CURRENCY.main} ${client.util.formatNumber(Math.round(winnerReward))}\n\nПроигравший: ${member} -${CURRENCY.main} ${client.util.formatNumber(bet)}`)
             .setFooter({text: "Дождитесь администрации!"})
             .send(null, {components: [row]})
         
