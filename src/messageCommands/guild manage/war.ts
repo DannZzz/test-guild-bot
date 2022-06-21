@@ -24,7 +24,7 @@ export default new MessageCommand({
 
         const type = args.shift();
         const name = args.join(" ");
-        if (!["new", "cancel"].includes(type)) return methods.createError(msg, `Укажите \`new\`, чтобы объявить гильдию войну, либо \`cancel\`, чтобы предложить отменить войну!`).send();
+        if (!["new", "cancel"].includes(type)) return methods.createError(msg, `Укажите \`new\`, чтобы объявить гильдию войну, либо \`cancel\`, чтобы предложить отменить войну!`, "war").send();
 
         const specGuild = (await fetchGuild(name))?.Guild;
         if (!specGuild) return Embed(msg).setError("Гильдия не найдена!").send();
@@ -74,7 +74,7 @@ export default new MessageCommand({
             })
         } else {
             if (myWar.includes(specGuild.id)) return Embed(msg).setError("Вы уже воюете с этой гильдии!").send();
-            if (myUnion.includes(specGuild.id)) return Embed(msg).setError("Эта гильдия ваш союзника, нельзя начинать войну!").send();
+            if (myUnion.includes(specGuild.id)) return Embed(msg).setError("Эта гильдия ваш союзник, нельзя начинать войну!").send();
             if (!guild.war) await guilds.updateOne({ id: guild.id }, { $set: { war: [] } });
             if (!specGuild.war) await guilds.updateOne({ id: specGuild.id }, { $set: { war: [] } });
             await Promise.all([

@@ -1,5 +1,5 @@
 import { Formatters } from "discord.js";
-import { BOX_EMOJI, CURRENCY, DEFAULT_BOOST_AMOUNT, GUILD_EMOJI, LEVEL_EMOJI, MAX_LENGTH_USER_DESCRIPTION } from "../../config";
+import { BOX_EMOJI, CURRENCY, DEFAULT_BOOST_AMOUNT, GUILD_EMOJI, LEVEL_EMOJI, MAX_LENGTH_USER_DESCRIPTION, XP_BOOST_IF_USER_GUILD_HAS_UNION } from "../../config";
 import { findOrCreate, getCurrentLevelByXp, getMemberGuild } from "../../database/db";
 import { GuildSchema } from "../../database/models/guildSchema";
 import { Member } from "../../database/models/memberSchema";
@@ -8,8 +8,7 @@ import { Embed } from "../../structures/Embed";
 import { MessageCommand } from "../../structures/MessageCommand";
 
 export default new MessageCommand ({
-    name: "user-guild",
-    aliases: ["user", 'ug'],
+    name: "user",
     category: 2,
     description: "статистика участника",
     examples: ["{prefix}user-guild @Aeolian#0001"],
@@ -37,8 +36,8 @@ export default new MessageCommand ({
             }
         }
 
-        // if (memberData.guildName) defaultBoost += 0.2;
-
+        if (memberGuild && memberGuild?.union?.length > 0 ) defaultBoost += XP_BOOST_IF_USER_GUILD_HAS_UNION;
+        
         const emb = Embed(msg)
             .setColor(client.colors.main || "RANDOM")
             .setAuthor({name: member.user.tag, iconURL: member.displayAvatarURL({dynamic: true})})

@@ -27,9 +27,11 @@ export const XP_ADD_ONE_TIME_IN_MINUTES: {add: number, time: number} = {
     add: +process.env.XP_FOR_MESSAGE || 10, // 10 опыта за одно сообщение в течение
     time: +process.env.ONE_MESSAGE_IN || 30, // 30-и секунд
 }
-export const ONE_MINUTE_VOICE: number = +process.env.ONE_MINUTE_VOICE || 100; // Количество опыта за одну минуту в войсе
+export const ONE_MINUTE_VOICE: number = +process.env.ONE_MINUTE_VOICE || 5; // Количество опыта за одну минуту в войсе
 export const UNION_DECLINED_COOLDOWN: string = `${process.env.UNION_DECLINED_COOLDOWN || 2}h` // Количество часов кулдауна после отклонение предложений союза
 export const XP_BOOST_IF_USER_GUILD_HAS_UNION: number = +process.env.XP_BOOST_IF_USER_GUILD_HAS_UNION || 0.2; // + 0.2 к росту опыта если гильдия участника в союзе
+export const XP_BOOST_IF_USERS_GUILDS_IN_WAR: number = +process.env.XP_BOOST_IF_USERS_GUILDS_IN_WAR || 2; // Ставка * 2 победителю дуэли, типа умножитель, когда гильдии соперников воююут
+
 export const ONE_DAY_REWARD: number = +process.env.ONE_DAY_REWARD || 100; // Ежедневная награда для первого дя и потом рост: 1д - 100, 2д - 200, 3д - 300...
 export const DEFAULT_BOOST_AMOUNT: number = +process.env.DEFAULT_BOOST_AMOUNT || 1; // Дефолтный прирост опыта
 export const BOOST_SHOP: {cost: number, duration: string, visual?: string}[] = [ // Бусты профиля, длительность и цена, а также визуальные тексты для показа в сообщений

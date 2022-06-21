@@ -26,7 +26,7 @@ export default new MessageCommand ({
 
         const type = args.shift();
         const name = args.join(" ");
-        if (!["new", "cancel"].includes(type)) return methods.createError(msg, `Укажите \`new\`, чтобы предложить гильдию союз, либо \`cancel\`, чтобы расторгнуть союз!`).send();
+        if (!["new", "cancel"].includes(type)) return methods.createError(msg, `Укажите \`new\`, чтобы предложить гильдию союз, либо \`cancel\`, чтобы расторгнуть союз!`, "union").send();
 
         const specGuild = (await fetchGuild(name))?.Guild;
         if (!specGuild) return Embed(msg).setError("Гильдия не найдена!").send();

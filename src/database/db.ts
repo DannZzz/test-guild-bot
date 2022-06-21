@@ -3,7 +3,7 @@ import { Member, members } from "./models/memberSchema";
 import { GuildMemberResolvable, UserResolvable } from "discord.js";
 import { guilds, GuildSchema } from "./models/guildSchema";
 import { Model } from "mongoose";
-import { DEFAULT_BOOST_AMOUNT, GUILD_MEMBERS_MAX_SIZE } from "../config";
+import { DEFAULT_BOOST_AMOUNT, GUILD_MEMBERS_MAX_SIZE, XP_BOOST_IF_USER_GUILD_HAS_UNION } from "../config";
 import { Levels } from "../docs/levels/levels";
 export const models = {
     servers,
@@ -75,6 +75,11 @@ export async function givePoints (memberId: string, points: number, none?: boole
         if (member.boost.until && member.boost.until > new Date()) {
             if (member.boost.addX) addX += member.boost.addX;
         }
+    }
+
+    if (member.guildName) {
+        const guild = await fetchGuild(member.guildName);
+        if (guild?.Guild?.union?.length > 0) addX += XP_BOOST_IF_USER_GUILD_HAS_UNION
     }
 
     toAdd *= addX

@@ -40,11 +40,12 @@ export default new Event ({
 
                     const winner = params[1];
                     const loser = params[2];
-                    const bet = +params[3];
+                    const winnerReward = +params[3];
+                    const bet = +params[4];
                     
                     await Promise.all([
                         (interaction.message as Message).edit({components: [], embeds: [(interaction.message.embeds[0] as MessageEmbed).addField("Статус", "🟢 Подтверждено")]}),
-                        members.updateOne({_id: winner}, {$inc: {duelsPlayed: 1, duelsWon: 1, points: bet}}),
+                        members.updateOne({_id: winner}, {$inc: {duelsPlayed: 1, duelsWon: 1, points: winnerReward}}),
                         members.updateOne({_id: loser}, {$inc: {duelsPlayed: 1, points: -bet}})
                     ])
                 }

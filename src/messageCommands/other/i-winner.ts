@@ -1,5 +1,7 @@
 import { MessageActionRow, MessageButton } from "discord.js";
-import { CURRENCY } from "../../config";
+import { CURRENCY, XP_BOOST_IF_USERS_GUILDS_IN_WAR } from "../../config";
+import { getMemberGuild } from "../../database/db";
+import { GuildSchema } from "../../database/models/guildSchema";
 import { Embed } from "../../structures/Embed";
 import { MessageCommand } from "../../structures/MessageCommand";
 
@@ -18,9 +20,15 @@ export default new MessageCommand ({
 
         if (!args[1] || isNaN(+args[1]) || Math.round(+args[1]) < 1) return methods.createError(msg, "Укажите ставку, на которую вы играли.", "i-won").send();
         const bet = Math.round(+args[1]);
+        const myGuild = await getMemberGuild(msg.author.id) as GuildSchema;
+        const memberGuild = await getMemberGuild(member.id) as GuildSchema;
+
+        let winnerReward = bet
+        if (myGuild && memberGuild && myGuild?.war?.includes(memberGuild.id)) winnerReward *= XP_BOOST_IF_USERS_GUILDS_IN_WAR;
+        
         const buttons = [
             new MessageButton()
-                .setCustomId(`duel-${msg.author.id}-${member.id}-${bet}`)
+                .setCustomId(`duel-${msg.author.id}-${member.id}-${Math.round(winnerReward)}-${bet}`)
                 .setLabel("Подтвердить")
                 .setStyle("SUCCESS"),
             new MessageButton()

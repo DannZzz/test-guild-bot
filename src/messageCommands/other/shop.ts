@@ -18,7 +18,7 @@ export default new MessageCommand ({
 
         const boosts = BOOST_SHOP.map((b, i) => [`${i+1}. Длительность: ${b.duration.replace("d", "д.").replace("h", "ч.")}`, `Цена: ${CURRENCY.main} ${b.visual ? b.visual : client.util.formatNumber(b.cost)}`]);
 
-        const boostsEmbed = Embed(msg).setTitle("🔖 Бусты Профиля").setFooter({text: `${prefix}.buy-boost <номер>`}).setText(`Получите **+${DEFAULT_BOOST_AMOUNT.toFixed(1)}** к росту опыта, возможность установить картинку на профиль!`);
+        const boostsEmbed = Embed(msg).setTitle("🔖 Бусты Профиля").setFooter({text: `${prefix}buy-boost <номер>`}).setText(`Получите **+${DEFAULT_BOOST_AMOUNT.toFixed(1)}** к росту опыта, возможность установить картинку на профиль!`);
         boosts.forEach(b => {
             boostsEmbed.addField(b[0], b[1]);
         })
