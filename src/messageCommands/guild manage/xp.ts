@@ -7,7 +7,7 @@ export default new MessageCommand ({
     name: "xp",
     master: true,
     category: 1,
-    description: "добавить очки к участнику",
+    description: "добавить очки участнику",
     examples: ["{prefix}xp @Dann#2523 -500", "{prefix}xp 489491741457494 7491"],
     async run ({args, msg, methods, prefix, client, sd}) {
         if (!args[0]) return methods.createError(msg, "Укажите участника.", 'xp').send();
