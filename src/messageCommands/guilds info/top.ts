@@ -16,15 +16,14 @@ export default new MessageCommand ({
     async run ({client, prefix, msg}) {
         const message = await Embed(msg).setText("🔃 | Генерирую топ...").send();
         const allGuilds = await guilds.find();
-        const got = await Promise.all(allGuilds.map(async x => {
+        const got = await Promise.all([...allGuilds].map(async x => {
             const fetch = await fetchGuild(x.name, {members: true});
 
-            const voiceAll = Math.round(fetch.members.reduce((aggr, obj) => aggr + (x.voice || 0), 0));
+            const voiceAll = Math.round(fetch.members.reduce((aggr, obj) => aggr + (obj.voice || 0), 0));
 
-            x.members = fetch.members;
-            x.voiceAll = voiceAll;
-            x.pointsAll = Math.round(fetch.members.reduce((aggr, obj) => aggr + obj.points ,0))
-            return x;
+            const members = fetch.members;
+            const pointsAll = Math.round(fetch.members.reduce((aggr, obj) => aggr + obj.points ,0))
+            return {...x, members, voiceAll, pointsAll};
         }))
         const texted: string[] = await Promise.all(got.sort((a, b) => b.pointsAll - a.pointsAll).map(async (obj, i) => {
             var privacy = "🔓";
