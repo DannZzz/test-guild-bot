@@ -20,11 +20,12 @@ export default new MessageCommand ({
             const fetch = await fetchGuild(x.name, {members: true});
 
             const voiceAll = Math.round(fetch.members.reduce((aggr, obj) => aggr + (obj.voice || 0), 0));
-
-            x.members = fetch.members;
-            x.voiceAll = voiceAll;
-            x.pointsAll = Math.round(fetch.members.reduce((aggr, obj) => aggr + obj.points ,0))
-            return x;
+            const data = {...x};
+            
+            data.members = fetch.members;
+            data.voiceAll = voiceAll;
+            data.pointsAll = Math.round(fetch.members.reduce((aggr, obj) => aggr + obj.points ,0))
+            return data;
         }))
         const texted: string[] = await Promise.all(got.sort((a, b) => b.pointsAll - a.pointsAll).map(async (obj, i) => {
             var privacy = "🔓";
