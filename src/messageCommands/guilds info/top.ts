@@ -24,7 +24,7 @@ export default new MessageCommand ({
             
             const members = fetch.members;
             const pointsAll = Math.round(fetch.members.reduce((aggr, obj) => aggr + obj.points ,0))
-            return {...x, voiceAll, members, pointsAll};
+            return {privacy: x.privacy, name: x.name, voiceAll, members, pointsAll};
         }))
         const texted: string[] = await Promise.all(got.sort((a, b) => b.pointsAll - a.pointsAll).map(async (obj, i) => {
             var privacy = "🔓";
