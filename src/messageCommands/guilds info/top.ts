@@ -22,10 +22,9 @@ export default new MessageCommand ({
             const voiceAll = Math.round(fetch.members.reduce((aggr, obj) => aggr + (obj.voice || 0), 0));
             const data = {...x};
             
-            data.members = fetch.members;
-            data.voiceAll = voiceAll;
-            data.pointsAll = Math.round(fetch.members.reduce((aggr, obj) => aggr + obj.points ,0))
-            return data;
+            const members = fetch.members;
+            const pointsAll = Math.round(fetch.members.reduce((aggr, obj) => aggr + obj.points ,0))
+            return {...x, voiceAll, members, pointsAll};
         }))
         const texted: string[] = await Promise.all(got.sort((a, b) => b.pointsAll - a.pointsAll).map(async (obj, i) => {
             var privacy = "🔓";
