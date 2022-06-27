@@ -17,12 +17,12 @@ export default new MessageCommand ({
         if (!member && args[0].toLowerCase() !== "all") return methods.createError(msg, `Укажите участника, либо \`all\`, чтобы сбрасывать участников.`, 'reset-member').send();
 
         if (member) {
-            await members.deleteOne({_id: member.id});
+            await members.updateOne({_id: member.id}, {$unset: {avatarUrl: '', description: '', points: '', voice: '', box: '', duelsPlayed: '', duelsWon: '', cooldowns: '', boost: ''}});
             Embed(msg)
                 .setSuccess(`Успешно сброшена статистика ${member.user.username}.`)
                 .send();
         } else {
-            await members.deleteMany();
+            await members.updateMany({}, {$unset: {avatarUrl: '', description: '', points: '', voice: '', box: '', duelsPlayed: '', duelsWon: '', cooldowns: '', boost: ''}});
             Embed(msg)
                 .setSuccess(`Успешно сброшена статистика всех участников.`)
                 .send();
