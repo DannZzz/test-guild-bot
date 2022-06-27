@@ -24,7 +24,7 @@ export default new MessageCommand ({
             
             const members = fetch.members;
             const pointsAll = Math.round(fetch.members.reduce((aggr, obj) => aggr + obj.points ,0))
-            return {privacy: x.privacy, name: x.name, voiceAll, members, pointsAll};
+            return {limit: x.limit, privacy: x.privacy, name: x.name, voiceAll, members, pointsAll};
         }))
         const texted: string[] = await Promise.all(got.sort((a, b) => b.pointsAll - a.pointsAll).map(async (obj, i) => {
             var privacy = "🔓";
@@ -32,7 +32,7 @@ export default new MessageCommand ({
 
             let remain = obj.voiceAll;
             
-            return `**${i+1}.** ${privacy} ${obj.name} | 👥 ${obj.members.length} из ${GUILD_MEMBERS_MAX_SIZE || 500} | ${CURRENCY.main} ${client.util.formatNumber(obj.pointsAll)} | 🎙 ${DateTime.toStringWithZero(remain)}`;
+            return `**${i+1}.** ${privacy} ${obj.name} | 👥 ${obj.members.length} из ${obj.limit || GUILD_MEMBERS_MAX_SIZE || 500} | ${CURRENCY.main} ${client.util.formatNumber(obj.pointsAll)} | 🎙 ${DateTime.toStringWithZero(remain)}`;
             })
         );
         
