@@ -21,15 +21,15 @@ export default new MessageCommand ({
         const thisMember = await findOrCreate("members", msg.author.id) as Member;
 
         if (thisMember.points < item.cost) return methods.createError(msg, "У вас недостаточно средств!").send();
-
-        if (thisMember.boost) {
-            if(thisMember.boost.until > new Date()) {
-                await members.updateOne({_id: msg.author.id}, {$set: {"boost.until": new Date(thisMember.boost.until.getTime() + ms(item.duration))}})
+        const until = thisMember?.boost?.until || new Date();
+        if (thisMember?.boost?.until) {
+            if(until > new Date()) {
+                await members.updateOne({_id: msg.author.id}, {$set: {"boost.until": new Date(until.getTime() + ms(item.duration))}})
             } else {
-                await members.updateOne({_id: msg.author.id}, {$set: {"boost.addX": DEFAULT_BOOST_AMOUNT, "boost.until": new Date(thisMember.boost.until.getTime() + ms(item.duration))}})
+                await members.updateOne({_id: msg.author.id}, {$set: {"boost.addX": DEFAULT_BOOST_AMOUNT, "boost.until": new Date(until.getTime() + ms(item.duration))}})
             }
         } else {
-            await members.updateOne({_id: msg.author.id}, {$set: {boost: {addX: DEFAULT_BOOST_AMOUNT, until: new Date(thisMember.boost.until.getTime() + ms(item.duration))}}})
+            await members.updateOne({_id: msg.author.id}, {$set: {boost: {addX: DEFAULT_BOOST_AMOUNT, until: new Date(until.getTime() + ms(item.duration))}}})
         }
         await givePoints(msg.author.id, -item.cost, true);
         Embed(msg).setSuccess("Вы успешно купили Буст Профиля!").send();
